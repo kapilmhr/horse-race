@@ -9,6 +9,7 @@ import Foundation
 
 protocol RaceViewModel:ObservableObject{
     func fetchRaces() async
+    
 }
 
 @MainActor
@@ -16,13 +17,31 @@ final class RaceViewModelImpl: RaceViewModel{
     
     @Published private(set) var raceSummariesViewState:ViewState<[RaceSummary]> = .ideal
     
+    @Published var selectedOptions: Set<RaceCategory> = []
+    
+    
     private var refreshTask: Task<Void, Never>?
     
-    private let raceService: RaceService
+    private let raceRepository: RaceRepository
     
     
-    init(raceService: RaceService){
-        self.raceService = raceService
+    var filteredRaces :[RaceSummary]{
+        
+        if case .success(let races) = raceSummariesViewState {
+            return Array(races
+                .filter { race in
+                    selectedOptions.isEmpty ||
+                    selectedOptions.map { $0.description }.contains(race.categoryID)
+                }
+                .prefix(5))
+        }
+        else {return []}
+        
+    }
+    
+    
+    init(raceRepository: RaceRepository) {
+        self.raceRepository = raceRepository
         startAutoRefresh()
     }
     
@@ -34,7 +53,7 @@ final class RaceViewModelImpl: RaceViewModel{
     func fetchRaces() async {
         raceSummariesViewState = .loading(placeholder: nil)
         do{
-            let response = try await raceService.getRaces()
+            let response = try await raceRepository.getRaces()
             raceSummariesViewState = .success(response:response)
         } catch{
             raceSummariesViewState = .error(error: error)
@@ -44,7 +63,7 @@ final class RaceViewModelImpl: RaceViewModel{
     
     
     // Set up an auto-refreshing mechanism using a Task
-    private func startAutoRefresh() {
+    func startAutoRefresh() {
         refreshTask = Task {
             while !Task.isCancelled {
                 await fetchRaces()
@@ -53,45 +72,13 @@ final class RaceViewModelImpl: RaceViewModel{
         }
     }
     
-    // Start a timer to update race countdowns
-    //    private func startTimers() {
-    //        timerTask = Task {
-    //            while !Task.isCancelled {
-    //                updateRaceTimers()
-    //                try? await Task.sleep(nanoseconds: 1_000_000_000) // Update every 1 second
-    //            }
-    //        }
-    //    }
-  /*
-    private func updateRaceTimers() {
-        guard case let .success(raceSummaries) = raceSummariesViewState else { return }
-        
-        let currentTimestamp = Int(Date().timeIntervalSince1970)
-        let updatedRaces = raceSummaries.map { race -> RaceSummary? in
-            var updatedRace = race
-            let timeRemaining = max(updatedRace.advertisedStart.seconds - currentTimestamp, 0)
-            let elapsedTime = max(currentTimestamp - updatedRace.advertisedStart.seconds, 0)
-            
-            if timeRemaining > 0 {
-                updatedRace.timer = timeRemaining.formatSecondsToTime() // Countdown
-            } else if elapsedTime < 60 {
-                updatedRace.timer = "-\(elapsedTime) s" // Elapsed time
-            } else {
-                //                updatedRace.timer = "Event has started!"
-                return nil
-            }
-            return updatedRace
-        }.compactMap { $0 }
-        raceSummariesViewState = .success(response: updatedRaces)
-    }
-    */
     
     // Removes expired race from the list
-    func removeExpiredRace(raceID: String) {
+    func removeExpiredRace(raceId: String) {
         // Ensure this is called on the main thread
         Task { @MainActor in
             if case .success(var races) = raceSummariesViewState {
-                races.removeAll { $0.raceID == raceID }
+                races.removeAll { $0.raceID == raceId }
                 raceSummariesViewState = .success(response: races)
             }
         }

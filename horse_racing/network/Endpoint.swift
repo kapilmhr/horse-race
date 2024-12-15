@@ -7,11 +7,11 @@
 import Foundation
 
 enum Endpoint{
-    case racing
+    case racing(method:String, count:Int)
 }
 
 extension Endpoint{
-    enum MethodType {
+    enum MethodType : Equatable {
         case GET
         case POST
         case PUT
@@ -39,8 +39,8 @@ extension Endpoint {
     
     var queryItems: [String: String]? {
         switch self {
-        case .racing:
-            return ["method":"nextraces", "count":"10"]
+        case .racing(let method, let count):
+            return ["method":"\(method)", "count":"\(count)"]
         }
     }
 }
