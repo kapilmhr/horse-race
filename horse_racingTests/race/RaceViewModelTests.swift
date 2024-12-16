@@ -12,27 +12,27 @@ import XCTest
 final class RaceViewModelTests: XCTestCase {
     private var mockRepository: MockRaceRepository!
     private var viewModel: RaceViewModelImpl!
-    
+
     override func setUp() {
         super.setUp()
         mockRepository = MockRaceRepository()
         viewModel = RaceViewModelImpl(raceRepository: mockRepository)
     }
-    
+
     override func tearDown() {
         viewModel = nil
         mockRepository = nil
         super.tearDown()
     }
-    
+
     func testFetchRaces_SuccessfulResponse() async {
         // Arrange
         let mockRaces = [mockRaceSummary]
         mockRepository.mockRaceSummaries = mockRaces
-        
+
         // Act
         await viewModel.fetchRaces()
-        
+
         // Assert the success state
         switch viewModel.raceSummariesViewState {
         case .success(let races):
@@ -48,14 +48,14 @@ final class RaceViewModelTests: XCTestCase {
             XCTFail("Expected success but got empty state")
         }
     }
-    
+
     func testFetchRaces_ErrorResponse() async {
         // Arrange
         mockRepository.shouldThrowError = true
-        
+
         // Act
         await viewModel.fetchRaces()
-        
+
         // Assert
         // Assert the error state
         switch viewModel.raceSummariesViewState {
@@ -71,15 +71,14 @@ final class RaceViewModelTests: XCTestCase {
             XCTFail("Expected error but got empty state")
         }
     }
-    
-    
+
     func testEmptyRaces_ReturnsEmptyState() async {
         // Arrange
         mockRepository.mockRaceSummaries = []
-        
+
         // Act
         await viewModel.fetchRaces()
-        
+
         // Assert
         switch viewModel.raceSummariesViewState {
         case .empty:
@@ -88,5 +87,5 @@ final class RaceViewModelTests: XCTestCase {
             XCTFail("Expected empty state but got \(viewModel.raceSummariesViewState)")
         }
     }
-    
+
 }

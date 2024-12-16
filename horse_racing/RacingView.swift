@@ -9,14 +9,13 @@ import SwiftUI
 
 struct RacingView: View {
     @StateObject private var raceViewModel = RaceViewModelImpl()
-    
-    
+
     let options = [
         RaceCategory.horse,
         RaceCategory.greyhound,
         RaceCategory.harness
     ]
-    
+
     var body: some View {
         ZStack {
             switch raceViewModel.raceSummariesViewState {
@@ -24,7 +23,7 @@ struct RacingView: View {
                 LoadingView(text: "Loading")
             case .empty:
                 EmptyStateView()
-            case .success(_):
+            case .success:
                 VStack {
                     MultiSelectSegmentedControl(
                         options: options,

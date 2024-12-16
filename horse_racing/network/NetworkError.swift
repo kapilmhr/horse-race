@@ -8,14 +8,14 @@
 import Foundation
 
 extension NetworkManager {
-    
+
     enum NetworkError: LocalizedError {
         case invalidUrl
         case custom(error: Error)
         case invalidStatusCode(statusCode: Int)
         case invalidData
         case failedToDecode(error: Error)
-        
+
         var errorDescription: String? {
             switch self {
             case .invalidUrl:

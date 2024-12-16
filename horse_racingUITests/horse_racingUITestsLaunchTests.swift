@@ -7,9 +7,9 @@
 
 import XCTest
 
-final class horse_racingUITestsLaunchTests: XCTestCase {
+final class HorseRacingUITestsLaunchTests: XCTestCase {
 
-    override class var runsForEachTargetApplicationUIConfiguration: Bool {
+    override static var runsForEachTargetApplicationUIConfiguration: Bool {
         true
     }
 

@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct horse_racingApp: App {
+struct HorseRacingApp: App {
     var body: some Scene {
         WindowGroup {
             RacingView()

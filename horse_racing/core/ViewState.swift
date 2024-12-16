@@ -8,27 +8,27 @@
 import Foundation
 
 enum ViewState<T: Decodable>: Equatable {
-    
+
     case ideal
-    case loading(placeholder: T?) // TODO: change placeholder: T?
+    case loading(placeholder: T?)
     case success(response: T)
     case empty
     case error(error: Error)
-    
+
     var errorValue: Error? {
         if case .error(let error) = self {
             return error
         }
         return nil
     }
-    
+
     var successValue: T? {
         if case .success(let response) = self {
             return response
         }
         return nil
     }
-    
+
     static func == (lhs: ViewState<T>, rhs: ViewState<T>) -> Bool {
         switch (lhs, rhs) {
         case (.ideal, .ideal):

@@ -5,7 +5,6 @@
 //  Created by Kapil Maharjan on 16/12/2024.
 //
 
-
 import XCTest
 @testable import horse_racing
 
@@ -25,16 +24,16 @@ final class RaceViewModelFilteringTests: XCTestCase {
         mockRepository = nil
         super.tearDown()
     }
-    
+
     // When no categories are selected, the filtered races should return all races.
     func testFilteredRaces_NoSelectedOptions_ReturnsAll() async {
         // Arrange
         mockRepository.mockRaceSummaries = [mockRaceSummary]
         await viewModel.fetchRaces()
-        
+
         // Act
         viewModel.selectedOptions = []
-        
+
         // Assert
         XCTAssertEqual(viewModel.filteredRaces.count, 1)
     }
@@ -72,15 +71,18 @@ final class RaceViewModelFilteringTests: XCTestCase {
             venueState: "NSW",
             venueCountry: "Australia"
         )
-        
+
         // Mock repository to return the mock races
         mockRepository.mockRaceSummaries = [mockRace1, mockRace2]
-        
+
         // Act
         await viewModel.fetchRaces()
-        
+
         // Set selected options
-        viewModel.selectedOptions = [RaceCategory.horse, RaceCategory.greyhound]  // Assuming RaceCategory.horse.description = "horse"
+        viewModel.selectedOptions = [
+            RaceCategory.horse,
+            RaceCategory.greyhound
+        ]
         // Debug: Print out the selected options and race category IDs to verify matching
         print("Filtered Races Count: \(viewModel.filteredRaces.count)")
         viewModel.filteredRaces.forEach {
