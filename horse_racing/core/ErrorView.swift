@@ -31,8 +31,7 @@ struct ErrorView: View {
     }
 }
 
-struct ErrorView_Preview: PreviewProvider{
-    static var previews: some View{
-        ErrorView(errorText: "Server Error")
-    }
+#Preview {
+    ErrorView(errorText: "Server Error")
 }
+

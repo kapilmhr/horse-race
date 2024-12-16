@@ -30,6 +30,7 @@ struct RaceRowView: View {
                 .accessibilityLabel("Race Number: \(race.raceNumber)")
             Text(race.meetingName)
                 .font(.subheadline)
+                .accessibilityLabel("Meeting Name: \(race.raceNumber)")
             Spacer()
             Text(timerViewModel.timerText)
                 .font(.caption)

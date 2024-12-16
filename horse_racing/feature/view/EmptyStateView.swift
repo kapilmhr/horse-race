@@ -29,8 +29,6 @@ struct EmptyStateView: View {
     }
 }
 
-struct EmptyStateView_Preview: PreviewProvider{
-    static var previews: some View{
-        EmptyStateView()
-    }
+#Preview {
+    EmptyStateView()
 }

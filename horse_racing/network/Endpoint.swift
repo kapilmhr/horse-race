@@ -21,12 +21,12 @@ extension Endpoint{
 
 extension Endpoint {
     
-    var host: String { "api.neds.com.au" }
+    var host: String { ApiConstant.baseUrl }
     
     var path: String {
         switch self {
         case .racing:
-            return "/rest/v1/racing/"
+            return ApiConstant.race
         }
     }
     
