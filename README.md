@@ -195,8 +195,8 @@ H --> I[Service]
 
 To ensure the app works as expected, we have a comprehensive suite of unit and UI tests. Follow the steps below to run tests and view test coverage reports.
 
-### **Run All Tests**:  
-    In Xcode, navigate to the top menu and select:
+### Run All Tests:  
+In Xcode, navigate to the top menu and select:
 ```bash
 Product > Test
 ```
@@ -206,4 +206,4 @@ Product > Test
 
 Test coverage is tracked to ensure that key parts of the code are properly tested. After running the tests, you can view the coverage report in Xcode.
 
-<img src="https://github.com/kapilmhr/horse-race/raw/feat/lint/docs/coverage.png" width="350"/>
+ <img src="https://github.com/kapilmhr/horse-race/raw/feat/lint/docs/coverage.png" width="350"/>
