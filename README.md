@@ -209,4 +209,4 @@ Product > Test
 
 Test coverage is tracked to ensure that key parts of the code are properly tested. After running the tests, you can view the coverage report in Xcode.
 
-<img src="https://github.com/kapilmhr/horse-race/raw/feat/docs/docs/coverage.png" width="350"/>
+<img src="https://github.com/kapilmhr/horse-race/raw/feat/lint/docs/coverage.png" width="350"/>
