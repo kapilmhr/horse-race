@@ -191,21 +191,18 @@ H --> I[Service]
 ```
 
 
-### Testing
-
-
-### Testing
+## Testing
 
 To ensure the app works as expected, we have a comprehensive suite of unit and UI tests. Follow the steps below to run tests and view test coverage reports.
 
-  **Run All Tests**:  
+### **Run All Tests**:  
     In Xcode, navigate to the top menu and select:
 ```bash
 Product > Test
 ```
 > Alternatively, you can press `Cmd + U` to run all tests in the project.
 
-#### Coverage
+### Coverage
 
 Test coverage is tracked to ensure that key parts of the code are properly tested. After running the tests, you can view the coverage report in Xcode.
 
