@@ -7,10 +7,10 @@
   The **Horse Racing App** is a dynamic and interactive application designed for racing enthusiasts. It provides real-time updates about upcoming horse racing events, making it easy for users to stay informed and track races efficiently. Leveraging the **MVVM architecture** and **SwiftUI**, the app fetches data from a server through an API and presents it in a clean, user-friendly interface.
   
  **It has two modules:**
-##### 1. MVVM Scalable architecture
+##### [1. MVVM Scalable architecture](https://github.com/kapilmhr/horse-race/blob/main/README.md#1-mvvm)
 The implementation of this architecture is in the `main` branch.
-##### 2. Modular Approach
-The implementation of this architecture is in the `feat/modular-approach` branch.
+##### [2. Modular Approach](https://github.com/kapilmhr/horse-race/blob/main/README.md#2-modular-architecture)
+The implementation of this architecture is in the [`feat/modular-approach`](https://github.com/kapilmhr/horse-race/tree/feat/modular-approach) branch.
 
 
 ## Getting Started
