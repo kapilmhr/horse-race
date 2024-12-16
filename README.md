@@ -20,6 +20,7 @@ The list dynamically updates to show races that have yet to begin. Races that ha
   ### **Race List**
 
 The app's primary screen displays a concise list of the next five upcoming races. Each race entry includes the following details:
+
 <img src="https://github.com/kapilmhr/horse-race/raw/feat/docs/docs/racerow.png" width="350"/>
 
 1.  **Category Image**: A thumbnail representing the category of the race (e.g., Horse, Greyhound, or Harness).
