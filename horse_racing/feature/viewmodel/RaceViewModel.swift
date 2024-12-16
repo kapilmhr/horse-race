@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Core
 
 /// A protocol that defines the functionality of a view model for fetching and managing race data.
 protocol RaceViewModel:ObservableObject{

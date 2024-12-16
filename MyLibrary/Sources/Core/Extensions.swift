@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-extension Color {
+public extension Color {
     init?(hex: String) {
         guard let uiColor = UIColor(named: hex) else { return nil }
         self.init(uiColor: uiColor)
     }
 }
 
-extension Int {
+public extension Int {
     
     func formatTime() -> String {
         let date = Date(timeIntervalSince1970: TimeInterval(self))

@@ -5,10 +5,10 @@
 //  Created by Kapil Maharjan on 13/12/2024.
 //
 
-class ApiConstant{
+public enum ApiConstant{
     //BaseUrl
-    static let baseUrl = "api.neds.com.au"
+    public static let baseUrl = "api.neds.com.au"
     
     //Endpoints
-    static let race = "/rest/v1/racing/"
+    public static let race = "/rest/v1/racing/"
 }

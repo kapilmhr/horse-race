@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Core
 
 struct RacingView: View {
     @StateObject private var raceViewModel = RaceViewModelImpl()

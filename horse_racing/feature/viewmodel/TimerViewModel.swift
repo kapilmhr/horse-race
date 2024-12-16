@@ -7,6 +7,7 @@
 
 
 import Foundation
+import Core
 
 /// A view model that handles a countdown timer for a race, updating the time remaining or elapsed.
 @MainActor

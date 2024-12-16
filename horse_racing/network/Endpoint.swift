@@ -5,6 +5,7 @@
 //  Created by Kapil Maharjan on 15/12/2024.
 //
 import Foundation
+import Core
 
 enum Endpoint{
     case racing(method:String, count:Int)

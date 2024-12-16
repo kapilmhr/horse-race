@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8219A8712D10102800A8A4A0 /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = 8219A8702D10102800A8A4A0 /* Core */; };
 		827D4D442D0E59530095FBBB /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 827D4D432D0E59530095FBBB /* README.md */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8219A86E2D100F5900A8A4A0 /* MyLibrary */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = MyLibrary; sourceTree = "<group>"; };
 		8244A8D32D0C02430010BA61 /* horse_racing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = horse_racing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8244A8E32D0C02440010BA61 /* horse_racingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = horse_racingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8244A8ED2D0C02440010BA61 /* horse_racingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = horse_racingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8219A8712D10102800A8A4A0 /* Core in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,6 +85,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8219A86F2D10102800A8A4A0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		8244A8CA2D0C02430010BA61 = {
 			isa = PBXGroup;
 			children = (
@@ -91,6 +101,8 @@
 				8244A8E62D0C02440010BA61 /* horse_racingTests */,
 				8244A8F02D0C02440010BA61 /* horse_racingUITests */,
 				8244A8D42D0C02430010BA61 /* Products */,
+				8219A86E2D100F5900A8A4A0 /* MyLibrary */,
+				8219A86F2D10102800A8A4A0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -125,6 +137,7 @@
 			);
 			name = horse_racing;
 			packageProductDependencies = (
+				8219A8702D10102800A8A4A0 /* Core */,
 			);
 			productName = horse_racing;
 			productReference = 8244A8D32D0C02430010BA61 /* horse_racing.app */;
@@ -574,6 +587,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8219A8702D10102800A8A4A0 /* Core */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Core;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8244A8CB2D0C02430010BA61 /* Project object */;
 }

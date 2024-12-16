@@ -7,11 +7,15 @@
 
 import SwiftUI
 
-struct ErrorView: View {
+public struct ErrorView: View {
     
-    let errorText:String
+    let errorText: String
     
-    var body: some View {
+    public init(errorText: String) {
+        self.errorText = errorText
+    }
+    
+    public var body: some View {
         VStack {
             VStack(alignment: .center, spacing: 16) {
                 Image(systemName: "tornado")
