@@ -1,3 +1,4 @@
+
 # Horse Race
 
 
@@ -19,6 +20,7 @@ The list dynamically updates to show races that have yet to begin. Races that ha
   ### **Race List**
 
 The app's primary screen displays a concise list of the next five upcoming races. Each race entry includes the following details:
+<img src="https://github.com/kapilmhr/horse-race/raw/feat/docs/docs/racerow.png" width="350"/>
 
 1.  **Category Image**: A thumbnail representing the category of the race (e.g., Horse, Greyhound, or Harness).
 2.  **Race Number**: The unique identifier for each race (e.g., _R1_).
@@ -37,8 +39,15 @@ The app provides users with the ability to filter races by their specific catego
 2.  **Greyhound Racing**
 3.  **Harness Racing**
 
+<img src="https://github.com/kapilmhr/horse-race/raw/feat/docs/docs/categories.png" width="300"/>
+
 Alternatively, users can **remove all filters** to view a comprehensive list of all races across all categories. When no filter is applied, the races are displayed in **ascending order of their advertised start time**, allowing users to see the upcoming events chronologically.
 
+
+----------
+
+### Preview
+<img src="https://github.com/kapilmhr/horse-race/raw/feat/docs/docs/screen.png" width="300"/>
 
 ----------
 ## Flow
