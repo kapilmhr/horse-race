@@ -23,7 +23,6 @@ struct MultiSelectSegmentedControl: View {
                         toggleSelection(option)
                     }) {
                         ZStack(alignment: .bottom) {
-                            // Background color for the button
                             
                             // Load the SVG image
                             Image(option.id.lowercased())

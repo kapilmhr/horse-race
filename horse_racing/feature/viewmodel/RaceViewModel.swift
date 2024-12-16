@@ -7,35 +7,66 @@
 
 import Foundation
 
+/// A protocol that defines the functionality of a view model for fetching and managing race data.
 protocol RaceViewModel:ObservableObject{
     func fetchRaces() async
+    
 }
 
 @MainActor
 final class RaceViewModelImpl: RaceViewModel{
     
+    /// A view state representing the current status of race summaries (e.g., loading, success, error).
     @Published private(set) var raceSummariesViewState:ViewState<[RaceSummary]> = .ideal
     
+    /// A set of selected race categories used for filtering the races.
+    @Published var selectedOptions: Set<RaceCategory> = []
+    
+    /// A task responsible for auto-refreshing the race data at regular intervals.
     private var refreshTask: Task<Void, Never>?
     
-    private let raceService: RaceService
+    /// The repository responsible for fetching race data.
+    private let raceRepository: RaceRepository
     
-    
-    init(raceService: RaceService){
-        self.raceService = raceService
+    init(raceRepository: RaceRepository = RaceRepositoryImpl()) {
+        self.raceRepository = raceRepository
         startAutoRefresh()
     }
     
-    deinit{
-        refreshTask?.cancel() // Cancel the task when ViewModel is deallocated
+    
+    /// A filtered list of races based on the selected race categories, showing a maximum of 5 races.
+    var filteredRaces :[RaceSummary]{
+        
+        if case .success(let races) = raceSummariesViewState {
+            return Array(races
+                .filter { race in
+                    selectedOptions.isEmpty ||
+                    selectedOptions.map { $0.description }.contains(race.categoryID)
+                }
+                .prefix(5))
+        }
+        else {return []}
         
     }
     
+    
+    // Cancels the refresh task when the view model is deallocated.
+    deinit{
+        refreshTask?.cancel() // Cancel the task when ViewModel is deallocated
+    }
+    
+    
+    /// Asynchronously fetches race data and updates the view state.
     func fetchRaces() async {
         raceSummariesViewState = .loading(placeholder: nil)
         do{
-            let response = try await raceService.getRaces()
-            raceSummariesViewState = .success(response:response)
+            let response = try await raceRepository.loadRaces()
+            
+            if response.isEmpty {
+                raceSummariesViewState = .empty
+            } else {
+                raceSummariesViewState = .success(response:response)
+            }
         } catch{
             raceSummariesViewState = .error(error: error)
         }
@@ -43,8 +74,8 @@ final class RaceViewModelImpl: RaceViewModel{
     
     
     
-    // Set up an auto-refreshing mechanism using a Task
-    private func startAutoRefresh() {
+    // Starts an auto-refresh mechanism that periodically fetches race data every 30 seconds.
+    func startAutoRefresh() {
         refreshTask = Task {
             while !Task.isCancelled {
                 await fetchRaces()
@@ -53,45 +84,14 @@ final class RaceViewModelImpl: RaceViewModel{
         }
     }
     
-    // Start a timer to update race countdowns
-    //    private func startTimers() {
-    //        timerTask = Task {
-    //            while !Task.isCancelled {
-    //                updateRaceTimers()
-    //                try? await Task.sleep(nanoseconds: 1_000_000_000) // Update every 1 second
-    //            }
-    //        }
-    //    }
-  /*
-    private func updateRaceTimers() {
-        guard case let .success(raceSummaries) = raceSummariesViewState else { return }
-        
-        let currentTimestamp = Int(Date().timeIntervalSince1970)
-        let updatedRaces = raceSummaries.map { race -> RaceSummary? in
-            var updatedRace = race
-            let timeRemaining = max(updatedRace.advertisedStart.seconds - currentTimestamp, 0)
-            let elapsedTime = max(currentTimestamp - updatedRace.advertisedStart.seconds, 0)
-            
-            if timeRemaining > 0 {
-                updatedRace.timer = timeRemaining.formatSecondsToTime() // Countdown
-            } else if elapsedTime < 60 {
-                updatedRace.timer = "-\(elapsedTime) s" // Elapsed time
-            } else {
-                //                updatedRace.timer = "Event has started!"
-                return nil
-            }
-            return updatedRace
-        }.compactMap { $0 }
-        raceSummariesViewState = .success(response: updatedRaces)
-    }
-    */
     
-    // Removes expired race from the list
-    func removeExpiredRace(raceID: String) {
+    // Removes an expired race from the list of race summaries.
+    /// - Parameter raceId: The ID of the race to be removed.
+    func removeExpiredRace(raceId: String) {
         // Ensure this is called on the main thread
         Task { @MainActor in
             if case .success(var races) = raceSummariesViewState {
-                races.removeAll { $0.raceID == raceID }
+                races.removeAll { $0.raceID == raceId }
                 raceSummariesViewState = .success(response: races)
             }
         }

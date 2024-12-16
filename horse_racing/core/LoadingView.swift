@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// A custom SwiftUI view that displays a loading spinner and a text label.
 struct LoadingView: View {
     
     let text:String

@@ -7,12 +7,9 @@
 
 import SwiftUI
 
-struct ContentView: View {
-    @StateObject private var raceViewModel = RaceViewModelImpl(
-        raceService: RaceServiceImpl()
-    )
+struct RacingView: View {
+    @StateObject private var raceViewModel = RaceViewModelImpl()
     
-    @State private var selectedOptions: Set<RaceCategory> = []
     
     let options = [
         RaceCategory.horse,
@@ -27,37 +24,29 @@ struct ContentView: View {
                 LoadingView(text: "Loading")
             case .empty:
                 EmptyStateView()
-            case .success(let response):
+            case .success(_):
                 VStack {
                     MultiSelectSegmentedControl(
                         options: options,
-                        selectedOptions: $selectedOptions
+                        selectedOptions: $raceViewModel.selectedOptions
                     )
-                    
-                    let filteredRaces = Array(response
-                        .filter { race in
-                            selectedOptions.isEmpty ||
-                            selectedOptions.map { $0.description }.contains(race.categoryID)
-                        }
-                        .prefix(5))
-                    
-                    if filteredRaces.isEmpty {
+                    if raceViewModel.filteredRaces.isEmpty {
                         EmptyStateView()
                     } else {
                         RaceListView(
-                            races: filteredRaces,
+                            races: raceViewModel.filteredRaces,
                             onExpired: { raceID in
-                                raceViewModel.removeExpiredRace(raceID: raceID)
+                                raceViewModel.removeExpiredRace(raceId: raceID)
                             }
                         )
                     }
                 }
             case .error(error: let error):
-                Text(error.localizedDescription)
+                ErrorView(errorText: error.localizedDescription)
             }
         }
     }
 }
 #Preview {
-    ContentView()
+    RacingView()
 }
