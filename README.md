@@ -5,8 +5,16 @@
 ## Overview
 
   The **Horse Racing App** is a dynamic and interactive application designed for racing enthusiasts. It provides real-time updates about upcoming horse racing events, making it easy for users to stay informed and track races efficiently. Leveraging the **MVVM architecture** and **SwiftUI**, the app fetches data from a server through an API and presents it in a clean, user-friendly interface.
+  
+ **It has two modules:**
+##### 1. MVVM Scalable architecture
+The implementation of this architecture is in the `main` branch.
+##### 2. Modular Approach
+The implementation of this architecture is in the `feat/modular-approach` branch.
 
-## Installation
+
+## Getting Started
+### 1. Installation
 
 To run this project locally, clone the repository and open it in Xcode.
 ```bash
@@ -17,7 +25,7 @@ open horse_racing.xcodeproj
 
 Ensure you have the latest version of Xcode and an iOS device or simulator set up.
 
-### SwiftLint Installation and Setup for Xcode
+### 2. SwiftLint Installation and Setup for Xcode
 #### Installation with Homebrew (Recommended)
 ```bash 
 brew install swiftlint
@@ -28,10 +36,16 @@ brew install swiftlint
 -   Click the **+** button and select **New Run Script Phase**.
 -   In the new **Run Script Phase**, add the following script:
 ```bash
-if which swiftlint >/dev/null; then
-  swiftlint
+if [[ "$(uname -m)" == arm64 ]]
+then
+    export PATH="/opt/homebrew/bin:$PATH"
+fi
+
+if command -v swiftlint >/dev/null 2>&1
+then
+    swiftlint
 else
-  echo "Warning: SwiftLint not installed, install it via Homebrew."
+    echo "warning: `swiftlint` command not found - See https://github.com/realm/SwiftLint#installation for installation instructions."
 fi
 ```
 > Ensure the **Run Script Phase** is placed after **Compile Sources**.
@@ -42,7 +56,28 @@ fi
     
 2.  You can customize the rules and behavior by modifying this `.swiftlint.yml` file.
 
+**Reference: [SwiftLint](https://github.com/realm/SwiftLint)**
 
+### 3. Layouts and Font Scaling with Accessibility in SwiftUI
+#### Responsive Layouts for Font Scaling
+-   Use SwiftUI's `.font` modifier with predefined text styles like `.body`, `.headline`, or `.caption` to ensure text scales dynamically.
+-   Avoid fixed-size constraints, as they can truncate or distort content at larger font sizes.
+-   Test your layouts using different text size settings (including accessibility sizes) via the **Accessibility Inspector** or device settings.
+```swift
+Text("Horse Race")
+.bold()
+.font(.subheadline)
+```
+
+#### Accessibility Labels in SwiftUI
+The `accessibilityLabel` modifier in SwiftUI enhances  app’s compatibility with **VoiceOver** and other assistive technologies. It provides a meaningful, descriptive alternative to the text or UI elements, helping visually impaired users better understand your app.
+
+```swift
+Text("Race Number")
+.bold()
+.font(.headline)
+.accessibilityLabel("Race Number")
+```
 ## **Feature**
 
 -   **Real-Time Updates:** Fetches horse racing data from a server and displays it in an organized, filtered list.
@@ -158,9 +193,10 @@ HorseRacingApp/
 
 ```
 
-### 2. Modular Architecture
+### 2. Modular Architecture 
 
 The `core` module is imported into the `main app` module
+
 
 ```mermaid
 graph LR
@@ -173,6 +209,28 @@ G --> H[Repository ]
 H --> I[Service]
 ```
 
+##### Flow Diagram
+```mermaid
+flowchart TD
+    A[Main App] --> B[Main Module]
+    B --> C[Components]
+
+D[Library] --> E[Core]
+        E-->|Import to main| B
+        E-->|Use core feature| C
+    A:::MainModule
+    B:::integrationTests
+    C:::e2eTests
+    D:::library
+    E:::core
+
+    classDef MainModule fill:#FFDC74,stroke:#F59E00,stroke-width:2px,font-weight:bold
+    classDef integrationTests fill:#FCA47E,stroke:#D94E1F,stroke-width:2px,font-weight:bold
+    classDef e2eTests fill:#C2E0F9,stroke:#0C4A6E,stroke-width:2px
+        classDef library fill:#FFDC74, stroke:#0C4A6E,stroke-width:2px,font-weight:bold
+        classDef core fill:#C2E0F9,stroke:#0C4A6E,stroke-width:2px
+
+```
 ### Folder Structure
 
 ```
@@ -195,7 +253,8 @@ H --> I[Service]
 
 To ensure the app works as expected, we have a comprehensive suite of unit and UI tests. Follow the steps below to run tests and view test coverage reports.
 
-### Run All Tests:  
+
+### ****Run All Tests****:
 In Xcode, navigate to the top menu and select:
 ```bash
 Product > Test
@@ -206,4 +265,4 @@ Product > Test
 
 Test coverage is tracked to ensure that key parts of the code are properly tested. After running the tests, you can view the coverage report in Xcode.
 
- <img src="https://github.com/kapilmhr/horse-race/raw/feat/lint/docs/coverage.png" width="350"/>
+<img src="https://github.com/kapilmhr/horse-race/raw/feat/lint/docs/coverage.png" width="350"/>
