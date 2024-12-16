@@ -5,7 +5,6 @@
 //  Created by Kapil Maharjan on 14/12/2024.
 //
 
-
 import SwiftUI
 
 struct EmptyStateView: View {

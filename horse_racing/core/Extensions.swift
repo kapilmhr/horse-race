@@ -15,7 +15,7 @@ extension Color {
 }
 
 extension Int {
-    
+
     func formatTime() -> String {
         let date = Date(timeIntervalSince1970: TimeInterval(self))
         let formatter = DateFormatter()
@@ -23,8 +23,7 @@ extension Int {
         formatter.timeStyle = .medium
         return formatter.string(from: date)
     }
-    
-    
+
     func formatSecondsToTime() -> String {
         let minutes = self / 60
         let seconds = self % 60
@@ -34,6 +33,5 @@ extension Int {
             return "\(seconds)s"
         }
     }
-    
-    
+
 }

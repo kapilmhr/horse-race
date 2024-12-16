@@ -5,7 +5,6 @@
 //  Created by Kapil Maharjan on 16/12/2024.
 //
 
-
 import XCTest
 @testable import horse_racing
 
@@ -31,14 +30,13 @@ final class RaceViewModelAutoRefreshTests: XCTestCase {
         let refreshExpectation = XCTestExpectation(description: "Races should refresh every 30 seconds")
         mockRepository.mockRaceSummaries = [mockRaceSummary]
         await viewModel.fetchRaces()
-        
+
         // Ensure that initial state is correct
         XCTAssertEqual(viewModel.filteredRaces.count, 1)
-        
+
         // Act: Trigger the auto-refresh mechanism
         viewModel.startAutoRefresh()
-        
-        
+
         // Set the expectation that the race count should be greater than 0 after refresh
         DispatchQueue.main.asyncAfter(deadline: .now() + 35) {
             // We simulate that the fetch operation was successful and the race summaries have been refreshed
@@ -49,7 +47,7 @@ final class RaceViewModelAutoRefreshTests: XCTestCase {
                 XCTFail("Race refresh failed")
             }
         }
-        
+
         // Assert: Wait for the expectation to be fulfilled within 40 seconds
         await fulfillment(of: [refreshExpectation], timeout: 40)
     }

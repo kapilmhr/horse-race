@@ -31,7 +31,7 @@ struct RaceSummary: Codable {
     let raceForm: RaceForm
     let venueID, venueName, venueState, venueCountry: String
     var timer: String = ""
-    
+
     enum CodingKeys: String, CodingKey {
           case raceID = "race_id"
           case raceName = "race_name"
@@ -64,7 +64,7 @@ struct RaceForm: Codable {
     let generated: Int
     let silkBaseURL: String
     let raceCommentAlternative: String?
-    
+
     enum CodingKeys: String, CodingKey {
            case distance
            case distanceType = "distance_type"
@@ -84,8 +84,7 @@ struct RaceForm: Codable {
 struct InfoType: Codable {
     let id, name, shortName: String
     let iconURI: String?
-    
-    
+
     enum CodingKeys: String, CodingKey {
             case id, name
             case shortName = "short_name"

@@ -9,12 +9,12 @@ import SwiftUI
 
 // A custom SwiftUI view that displays a loading spinner and a text label.
 struct LoadingView: View {
-    
-    let text:String
-    
+
+    let text: String
+
     var body: some View {
-        
-        VStack(spacing:8){
+
+        VStack(spacing: 8) {
             ProgressView()
                 .tint(.primaryColor)
             Text(text)

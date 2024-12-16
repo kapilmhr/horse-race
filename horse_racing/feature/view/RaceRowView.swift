@@ -5,19 +5,23 @@
 //  Created by Kapil Maharjan on 14/12/2024.
 //
 
-
 import SwiftUI
 
 struct RaceRowView: View {
     let race: RaceSummary
-    
+
     @StateObject private var timerViewModel: TimerViewModel
-    
+
     init(race: RaceSummary, onExpired: @escaping () -> Void) {
-        _timerViewModel = StateObject(wrappedValue: TimerViewModel(advertisedStart: race.advertisedStart.seconds, onExpired: onExpired))
+        _timerViewModel = StateObject(
+            wrappedValue: TimerViewModel(
+                advertisedStart: race.advertisedStart.seconds,
+                onExpired: onExpired
+            )
+        )
         self.race = race
     }
-    
+
     var body: some View {
         HStack {
             Image(getImageName(categoryId: race.categoryID))
@@ -38,7 +42,7 @@ struct RaceRowView: View {
         }
         .padding(8)
     }
-    
+
     private func getImageName(categoryId: String) -> String {
         switch categoryId {
         case RaceCategory.horse.description:

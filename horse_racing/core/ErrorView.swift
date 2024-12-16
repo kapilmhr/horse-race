@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct ErrorView: View {
-    
-    let errorText:String
-    
+
+    let errorText: String
+
     var body: some View {
         VStack {
             VStack(alignment: .center, spacing: 16) {
@@ -34,4 +34,3 @@ struct ErrorView: View {
 #Preview {
     ErrorView(errorText: "Server Error")
 }
-

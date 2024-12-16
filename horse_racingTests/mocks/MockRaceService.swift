@@ -8,21 +8,19 @@ import XCTest
 @testable import horse_racing
 
 final class MockRaceService: RaceService {
-    init(){}
+    init() {}
     public var stubRaceResponse: Result<[RaceSummary], Error>?
-    
-    public var didGeRaces: (() -> Void)?
-    
-    public var getRacesCallCount: Int = 0
 
+    public var didGeRaces: (() -> Void)?
+
+    public var getRacesCallCount: Int = 0
 
     func getRaces() async throws -> [horse_racing.RaceSummary] {
         defer {didGeRaces?()}
-        
+
         getRacesCallCount += 1
-        
+
         return try stubRaceResponse!.get()
     }
-    
-    
+
 }
