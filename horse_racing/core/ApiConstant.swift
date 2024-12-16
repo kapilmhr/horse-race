@@ -6,5 +6,9 @@
 //
 
 class ApiConstant{
-    static let baseUrl = "https://api.neds.com.au/rest/v1/racing/?method=nextraces&count=10"
+    //BaseUrl
+    static let baseUrl = "api.neds.com.au"
+    
+    //Endpoints
+    static let race = "/rest/v1/racing/"
 }

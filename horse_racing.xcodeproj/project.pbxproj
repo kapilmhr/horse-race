@@ -35,6 +35,11 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		8219A7B62D0FF00700A8A4A0 /* docs */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = docs;
+			sourceTree = "<group>";
+		};
 		8244A8D52D0C02430010BA61 /* horse_racing */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = horse_racing;
@@ -80,6 +85,7 @@
 		8244A8CA2D0C02430010BA61 = {
 			isa = PBXGroup;
 			children = (
+				8219A7B62D0FF00700A8A4A0 /* docs */,
 				827D4D432D0E59530095FBBB /* README.md */,
 				8244A8D52D0C02430010BA61 /* horse_racing */,
 				8244A8E62D0C02440010BA61 /* horse_racingTests */,
@@ -114,6 +120,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				8219A7B62D0FF00700A8A4A0 /* docs */,
 				8244A8D52D0C02430010BA61 /* horse_racing */,
 			);
 			name = horse_racing;
