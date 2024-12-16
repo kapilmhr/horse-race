@@ -7,31 +7,29 @@
 
 import Foundation
 
+/// A protocol defining the functionality of a repository that loads race data.
 protocol RaceRepository {
-    func getRaces() async throws-> [RaceSummary]
+    
+    /// Asynchronously loads a list of race summaries.
+    /// - Returns: An array of `RaceSummary` objects.
+    /// - Throws: An error if the race data cannot be loaded.
+    func loadRaces() async throws-> [RaceSummary]
     
 }
 
 final class RaceRepositoryImpl: RaceRepository{
     
-    private let networkManager: NetworkManagerImpl!
+    private let raceService: RaceService
     
-    init(networkManager: NetworkManagerImpl = NetworkManager.shared) {
-        self.networkManager = networkManager
+    init(raceService: RaceService = RaceServiceImpl() ){
+        self.raceService = raceService
     }
     
     
-    func getRaces() async throws -> [RaceSummary] {
+    func loadRaces() async throws -> [RaceSummary] {
         
-        let res = try await networkManager.request(session: .shared,
-                                                   .racing(method: "nextraces", count:10),
-                                                   type:RaceResponse.self)
-        
-        var raceSummaries = res.data.raceSummaries.map { $0.value }
-        
-        raceSummaries = raceSummaries.sorted { $0.advertisedStart.seconds < $1.advertisedStart.seconds }
-        
-        return raceSummaries;
+        // Delegates the call to the RaceService to fetch the race data.
+        return try await raceService.getRaces()
         
     }
 }

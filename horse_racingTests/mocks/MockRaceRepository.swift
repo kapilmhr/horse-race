@@ -9,10 +9,11 @@ import XCTest
 @testable import horse_racing
 
 final class MockRaceRepository: RaceRepository {
+        
     var shouldThrowError = false
     var mockRaceSummaries: [RaceSummary] = []
     
-    func getRaces() async throws -> [RaceSummary] {
+    func loadRaces() async throws -> [horse_racing.RaceSummary] {
         if shouldThrowError {
             throw NSError(domain: "MockError", code: 0, userInfo: nil)
         }

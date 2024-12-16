@@ -10,7 +10,8 @@ import Foundation
 
 // Protocol that defines the contract for any network manager implementation.
 protocol NetworkManagerImpl {
-    /// Asynchronous request method to fetch data from a specified `endpoint`.
+    
+    // Asynchronous request method to fetch data from a specified `endpoint`.
     ///
     /// - Parameters:
     ///   - session: The `URLSession` instance used to perform the request. Defaults to `.shared`.
@@ -35,15 +36,7 @@ final class NetworkManager: NetworkManagerImpl {
     private init() {}
     
     
-    /// Sends a network request and decodes the response into a model of type `T`.
-    ///
-    /// - Parameters:
-    ///   - session: `URLSession` instance (defaults to `.shared`).
-    ///   - endpoint: The endpoint containing URL and HTTP method.
-    ///   - type: The type of the model expected in the response.
-    /// - Returns: Decoded model of type `T`.
-    /// - Throws: `NetworkError` if any error occurs.
-    
+    // Sends a network request and decodes the response into a model of type `T`.
     func request<T: Codable>(session: URLSession = .shared,
                              _ endpoint: Endpoint,
                              type: T.Type) async throws -> T {

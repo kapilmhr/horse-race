@@ -11,7 +11,7 @@ import SwiftUI
 struct horse_racingApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RacingView()
         }
     }
 }

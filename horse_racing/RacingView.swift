@@ -7,10 +7,8 @@
 
 import SwiftUI
 
-struct ContentView: View {
-    @StateObject private var raceViewModel = RaceViewModelImpl(
-        raceRepository: RaceRepositoryImpl()
-    )
+struct RacingView: View {
+    @StateObject private var raceViewModel = RaceViewModelImpl()
     
     
     let options = [
@@ -32,14 +30,6 @@ struct ContentView: View {
                         options: options,
                         selectedOptions: $raceViewModel.selectedOptions
                     )
-                    //
-                    //                    let filteredRaces = Array(response
-                    //                        .filter { race in
-                    //                            selectedOptions.isEmpty ||
-                    //                            selectedOptions.map { $0.description }.contains(race.categoryID)
-                    //                        }
-                    //                        .prefix(5))
-                    
                     if raceViewModel.filteredRaces.isEmpty {
                         EmptyStateView()
                     } else {
@@ -58,5 +48,5 @@ struct ContentView: View {
     }
 }
 #Preview {
-    ContentView()
+    RacingView()
 }
